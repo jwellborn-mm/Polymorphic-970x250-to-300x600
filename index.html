@@ -1,26 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Tiles</title>
-	<link rel="stylesheet" type="text/css" href="tiles.css">
+    <title>Tiles</title>
+    <link rel="stylesheet" type="text/css" href="tiles.css">
+    <script>EBModulesToLoad = ['Video'];</script>
+    <script type="text/javascript" src="http://ds.serving-sys.com/BurstingScript/EBLoader.js"></script>
+    <script type="text/javascript">
+    function initEB() {
+        if (!EB.isInitialized()) {
+            EB.addEventListener(EBG.EventName.EB_INITIALIZED, startAd);
+        } else {
+            startAd();
+        }
+    }
+    function startAd(){
+        var video = document.getElementById("video");
+        var videoTrackingModule = new EBG.VideoModule(video);
+    }
+    function trackDoohickey(){
+        EB.userActionCounter('Doohickey');
+    }
+    </script>
 </head>
-<body>
+<body onload="initEB();">
 <div class="ad">
-<div class="tile bg-red">
-	<div class="safe-area">
-		<div class="content"></div>
-	</div>
-</div>
-<div class="tile middle bg-green">
-	<div class="safe-area">
-		<div class="content"></div>
-	</div>
-</div>
-<div class="tile bg-blue">
-	<div class="safe-area">
-		<div class="content"></div>
-	</div>
-</div>
+    <div class="tile">
+        <div class="safe-area">
+            <div class="content">
+                <div class="logo no-selection" onclick="javascript:EB.clickthrough();">
+                    <img src="assets/images/Sizmek Logo White 800x212.png" width="250" height="67" border="0">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tile middle">
+        <div class="safe-area">
+            <div class="content">
+                <video class="full" id="video" controls poster="assets/video/poster.jpg">
+                    <source src="assets/video/video.mp4" type="video/mp4">
+                    <source src="assets/video/video.webm" type="video/webm">
+                            Your browser does not support the <code>video</code> element.
+                </video>
+            </div>
+        </div>
+    </div>
+    <div class="tile right">
+        <div class="safe-area">
+            <div class="content">
+                <div class="buttons">
+                    <div class="button-outer" onclick="javascript:EB.clickthrough();">
+                        <div class="button-inner no-selection">Learn More</div>
+                    </div>
+                    <div class="button-outer" onclick="javascript:trackDoohickey();">
+                        <div class="button-inner no-selection">Doohickey</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
